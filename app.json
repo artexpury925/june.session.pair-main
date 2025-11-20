@@ -1,19 +1,58 @@
-
 {
-    "name": "Makino",
-    "description": "A whatsApp bot based on Baileysjs linrary (Ts+Js) with Multi Device support",
-    "repository": "https://github.com/anonphoenix007/CH13",
-    "logo": "https://telegra.ph/file/7aa528767ed96ddc17bc2.jpg",
-    "keywords": ["nodejs", "bot", "whatsapp bot", "whatsapp automation", "multi device"],
-    "buildpacks": [
-      {
-        "url": "heroku/nodejs"
+  "name": "VAMPARINA-MD",
+  "description": "The Most Powerful & Fastest WhatsApp Multi-Device Bot in Kenya • Built by Arnold Chirchir • 2025 Edition",
+  "repository": "https://github.com/artexpury925/vamp-bot-254",
+  "logo": "https://files.catbox.moe/8v2r0j.jpg",
+  "keywords": [
+    "whatsapp-bot",
+    "vampirina-md",
+    "baileys-md",
+    "multi-device",
+    "kenya-bot",
+    "arnold-chirchir",
+    "whatsapp-automation",
+    "pairing-code",
+    "qr-bot",
+    "2025"
+  ],
+  "website": "https://your-vampirina-site.com",
+  "env": {
+    "SESSION_ID": {
+      "description": "Put your VAMPARINA session ID here (optional if using auto-pairing)",
+      "value": "",
+      "required": false
+    },
+    "OWNER_NUMBER": {
+      "description": "Bot owner number (Kenyan format)",
+      "value": "254703110780",
+      "required": true
+    },
+    "PREFIX": {
+      "description": "Command prefix",
+      "value": ".",
+      "required": false
+    }
+  },
+  "addons": [],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
     },
     {
       "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
     },
     {
       "url": "https://github.com/clhuang/heroku-buildpack-webp-binaries.git"
-          }
-     ]
-} 
+    },
+    {
+      "url": "https://github.com/DuckyTeam/heroku-buildpack-imagemagick.git"
+    }
+  ],
+  "formation": {
+    "worker": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
+  "stack": "container"
+}
