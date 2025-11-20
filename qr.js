@@ -28,13 +28,13 @@ const {
 } = require("node:fs/promises")
 router.get('/', async (req, res) => {
 	const id = makeid();
-	async function MBUVI_MD_QR_CODE() {
+	async function VAMPARINA_QR_CODE() {
 		const {
 			state,
 			saveCreds
 		} = await useMultiFileAuthState('./temp/' + id)
 		try {
-			let Qr_Code_By_Mbuvi_Tech = Mbuvi_Tech({
+			let Qr_Code_By_VAMPARINA = Mbuvi_Tech({
 				auth: state,
 				printQRInTerminal: false,
 				logger: pino({
@@ -43,8 +43,8 @@ router.get('/', async (req, res) => {
 				browser: Browsers.macOS("Desktop"),
 			});
 
-			Qr_Code_By_Mbuvi_Tech.ev.on('creds.update', saveCreds)
-			Qr_Code_By_Mbuvi_Tech.ev.on("connection.update", async (s) => {
+			Qr_Code_By_VAMPARINA.ev.on('creds.update', saveCreds)
+			Qr_Code_By_VAMPARINA.ev.on("connection.update", async (s) => {
 				const {
 					connection,
 					lastDisconnect,
@@ -56,25 +56,26 @@ router.get('/', async (req, res) => {
 					let data = fs.readFileSync(__dirname + `/temp/${id}/creds.json`);
 					await delay(800);
 				   let b64data = Buffer.from(data).toString('base64');
-				   let session = await Qr_Code_By_Mbuvi_Tech.sendMessage(Qr_Code_By_Mbuvi_Tech.user.id, { text: 'JUNE-MD:~' + b64data });
+				   let session = await Qr_Code_By_VAMPARINA.sendMessage(Qr_Code_By_VAMPARINA.user.id, { text: 'VAMPARINA:~' + b64data });
 	
-				   let MBUVI_MD_TEXT = `
+				   let VAMPARINA_TEXT = `
 ╔════════════════════◇
-║『 SESSION CONNECTED』
-║ 🔵Session- Active And Working
-║ 🔷Base64- Session Type
+║    VAMPARINA CONNECTED
+║ Session Active & Working
+║ Base64 Session Type
+║ © 2025 Arnold Chirchir
 ╚════════════════════╝
 `;
-	 await Qr_Code_By_Mbuvi_Tech.sendMessage(Qr_Code_By_Mbuvi_Tech.user.id,{text:MBUVI_MD_TEXT},{quoted:session})
+	 await Qr_Code_By_VAMPARINA.sendMessage(Qr_Code_By_VAMPARINA.user.id,{text:VAMPARINA_TEXT},{quoted:session})
 
 
 
 					await delay(100);
-					await Qr_Code_By_Mbuvi_Tech.ws.close();
+					await Qr_Code_By_VAMPARINA.ws.close();
 					return await removeFile("temp/" + id);
 				} else if (connection === "close" && lastDisconnect && lastDisconnect.error && lastDisconnect.error.output.statusCode != 401) {
 					await delay(10000);
-					MBUVI_MD_QR_CODE();
+					VAMPARINA_QR_CODE();
 				}
 			});
 		} catch (err) {
@@ -87,6 +88,6 @@ router.get('/', async (req, res) => {
 			await removeFile("temp/" + id);
 		}
 	}
-	return await MBUVI_MD_QR_CODE()
+	return await VAMPARINA_QR_CODE()
 });
 module.exports = router
